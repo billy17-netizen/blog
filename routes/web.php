@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Home\AboutController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\AdminController;
+use \App\Http\Controllers\Home\HomeSliderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,8 +15,8 @@ use \App\Http\Controllers\AdminController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', static function () {
+    return view('frontend.index');
 });
 
 //Admin All routes
@@ -28,7 +30,20 @@ Route::controller(AdminController::class)->group(function() {
     Route::post('/update/password', 'updatePassword')->name('update.password');
 });
 
-Route::get('/dashboard', function () {
+//Frontend All routes
+Route::controller(HomeSliderController::class)->group(static function() {
+    Route::get('/home/slide', 'homeSlider')->name('home.slide');
+    Route::post('/update/slider', 'updateSlider')->name('update.slider');
+    Route::get('/update/slider', 'updateSlider')->name('about.page');
+});
+
+//About Page All routes
+Route::controller(AboutController::class)->group(static function() {
+    Route::get('/about/page', 'aboutPage')->name('about.page');
+    Route::post('/update/about', 'updateAbout')->name('update.about');
+});
+
+Route::get('/dashboard', static function () {
     return view('admin.index');
 })->middleware(['auth','verified'])->name('dashboard');
 
