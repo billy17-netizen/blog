@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\Home\AboutController;
+use App\Http\Controllers\Home\BlogCategoryController;
+use App\Http\Controllers\Home\BlogController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\AdminController;
 use \App\Http\Controllers\Home\HomeSliderController;
+use \App\Http\Controllers\Home\PortfolioController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,7 +33,7 @@ Route::controller(AdminController::class)->group(function() {
     Route::post('/update/password', 'updatePassword')->name('update.password');
 });
 
-//Frontend All routes
+//HomeSlide All routes
 Route::controller(HomeSliderController::class)->group(static function() {
     Route::get('/home/slide', 'homeSlider')->name('home.slide');
     Route::post('/update/slider', 'updateSlider')->name('update.slider');
@@ -52,6 +55,41 @@ Route::controller(AboutController::class)->group(static function() {
 
 });
 
+//Portfolio All routes
+Route::controller(PortfolioController::class)->group(static function() {
+    Route::get('/all/portfolio', 'allPortfolio')->name('all.portfolio');
+    Route::get('/add/portfolio', 'addPortfolio')->name('add.portfolio');
+    Route::post('/store/portfolio', 'storePortfolio')->name('store.portfolio');
+    Route::get('/edit/portfolio/{id}', 'editPortfolio')->name('edit.portfolio');
+    Route::post('/update/portfolio', 'updatePortfolio')->name('update.portfolio');
+    Route::get('/delete/portfolio/{id}', 'deletePortfolio')->name('delete.portfolio');
+    Route::get('/portfolio/details/{id}', 'portfolioDetails')->name('portfolio.details');
+
+});
+
+//BlogCategory All routes
+Route::controller(BlogCategoryController::class)->group(static function() {
+    Route::get('/all/blog/category', 'allBlogCategory')->name('all.blog.category');
+    Route::get('/add/blog/category', 'addBlogCategory')->name('add.blog.category');
+    Route::post('/store/blog/category', 'storeBlogCategory')->name('store.blog.category');
+    Route::get('/edit/blog/category/{id}', 'editBlogCategory')->name('edit.blog.category');
+    Route::post('/update/blog/category', 'updateBlogCategory')->name('update.blog.category');
+    Route::get('/delete/blog/category/{id}', 'deleteBlogCategory')->name('delete.blog.category');
+});
+
+//Blog All routes
+Route::controller(BlogController::class)->group(static function() {
+    Route::get('/all/blog', 'allBLog')->name('all.blog');
+    Route::get('/add/blog', 'addBLog')->name('add.blog');
+    Route::post('/store/blog', 'storeBLog')->name('store.blog');
+    Route::get('/edit/blog/{id}', 'editBLog')->name('edit.blog');
+    Route::post('/update/blog', 'updateBLog')->name('update.blog');
+    Route::get('/delete/blog/{id}', 'deleteBLog')->name('delete.blog');
+    Route::get('/blog/details/{id}', 'blogDetails')->name('blog.details');
+    Route::get('/category/blog/{id}', 'categoryBlog')->name('category.blog');
+
+    Route::get('/blog', 'homeBlog')->name('home.blog');
+});
 
 Route::get('/dashboard', static function () {
     return view('admin.index');
