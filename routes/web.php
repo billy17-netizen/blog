@@ -25,13 +25,13 @@ use \App\Http\Controllers\Home\ContactController;
 //    return view('frontend.index');
 //});
 
-//Home All routes
+//Home routes
 Route::controller(Controller::class)->group(static function() {
     Route::get('/', 'homeMain')->name('home');
 });
 
 //Admin All routes
-Route::controller(AdminController::class)->group(function() {
+Route::controller(AdminController::class)->middleware('auth')->group(function() {
     Route::get('/admin/logout', 'destroy')->name('admin.logout');
     Route::get('/admin/profile', 'profile')->name('admin.profile');
     Route::get('/edit/profile', 'editProfile')->name('edit.profile');
