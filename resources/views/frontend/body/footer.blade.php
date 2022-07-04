@@ -1,3 +1,7 @@
+@php
+    $allFooter = \App\Models\Footer::find(1);
+@endphp
+
 <footer class="footer">
     <div class="container">
         <div class="row justify-content-between">
@@ -5,12 +9,10 @@
                 <div class="footer__widget">
                     <div class="fw-title">
                         <h5 class="sub-title">Contact us</h5>
-                        <h4 class="title">+81383 766 284</h4>
+                        <h4 class="title">+{{$allFooter->number}}</h4>
                     </div>
                     <div class="footer__widget__text">
-                        <p>There are many variations of passages of lorem ipsum
-                            available but the majority have suffered alteration
-                            in some form is also here.</p>
+                        <p>{!! $allFooter->short_description !!}</p>
                     </div>
                 </div>
             </div>
@@ -21,8 +23,8 @@
                         <h4 class="title">AUSTRALIA</h4>
                     </div>
                     <div class="footer__widget__address">
-                        <p>Level 13, 2 Elizabeth Steereyt set <br> Melbourne, Victoria 3000</p>
-                        <a href="mailto:noreply@envato.com" class="mail">noreply@envato.com</a>
+                        <p>{{$allFooter->address}}</p>
+                        <a href="mailto:noreply@envato.com" class="mail">{{$allFooter->email}}</a>
                     </div>
                 </div>
             </div>
@@ -35,11 +37,8 @@
                     <div class="footer__widget__social">
                         <p>Lorem ipsum dolor sit amet enim. <br> Etiam ullamcorper.</p>
                         <ul class="footer__social__list">
-                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fab fa-behance"></i></a></li>
-                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="{{$allFooter->facebook}}"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="{{$allFooter->twitter}}"><i class="fab fa-twitter"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -49,7 +48,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="copyright__text text-center">
-                        <p>Copyright @ Theme_Pure 2021 All right Reserved</p>
+                        <p>{{$allFooter->copyright}} All right Reserved</p>
                     </div>
                 </div>
             </div>

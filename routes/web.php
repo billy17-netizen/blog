@@ -1,12 +1,15 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\Home\AboutController;
 use App\Http\Controllers\Home\BlogCategoryController;
 use App\Http\Controllers\Home\BlogController;
+use App\Http\Controllers\Home\FooterController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\AdminController;
 use \App\Http\Controllers\Home\HomeSliderController;
 use \App\Http\Controllers\Home\PortfolioController;
+use \App\Http\Controllers\Home\ContactController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,8 +21,13 @@ use \App\Http\Controllers\Home\PortfolioController;
 |
 */
 
-Route::get('/', static function () {
-    return view('frontend.index');
+//Route::get('/', static function () {
+//    return view('frontend.index');
+//});
+
+//Home All routes
+Route::controller(Controller::class)->group(static function() {
+    Route::get('/', 'homeMain')->name('home');
 });
 
 //Admin All routes
@@ -57,6 +65,7 @@ Route::controller(AboutController::class)->group(static function() {
 
 //Portfolio All routes
 Route::controller(PortfolioController::class)->group(static function() {
+    Route::get('/portfolio', 'homePortfolio')->name('home.portfolio');
     Route::get('/all/portfolio', 'allPortfolio')->name('all.portfolio');
     Route::get('/add/portfolio', 'addPortfolio')->name('add.portfolio');
     Route::post('/store/portfolio', 'storePortfolio')->name('store.portfolio');
@@ -89,6 +98,20 @@ Route::controller(BlogController::class)->group(static function() {
     Route::get('/category/blog/{id}', 'categoryBlog')->name('category.blog');
 
     Route::get('/blog', 'homeBlog')->name('home.blog');
+});
+
+//Footer All routes
+Route::controller(FooterController::class)->group(static function() {
+    Route::get('/footer/setup', 'footerSetup')->name('footer.setup');
+    Route::post('/update/footer', 'updateFooter')->name('update.footer');
+});
+
+//Contact All routes
+Route::controller(ContactController::class)->group(static function() {
+    Route::get('/contact', 'Contact')->name('contact.me');
+    Route::post('/store/message', 'storeMessage')->name('store.message');
+    Route::get('/contact/message', 'contactMessage')->name('contact.message');
+    Route::get('/delete/message/{id}', 'deleteMessage')->name('delete.message');
 });
 
 Route::get('/dashboard', static function () {
