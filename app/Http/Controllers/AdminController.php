@@ -49,6 +49,7 @@ class AdminController extends Controller
 
         if ($request->hasFile('profile_image')) {
             $image = $request->file('profile_image');
+            @unlink(public_path('upload/admin_images/' . $data->profile_image));
             $imageName = date('YmdHi').$image->getClientOriginalName();
             $image->move(public_path('upload/admin_images'), $imageName);
             $data['profile_image'] = $imageName;
